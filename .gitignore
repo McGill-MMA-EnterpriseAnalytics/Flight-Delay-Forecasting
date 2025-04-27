@@ -1,1 +1,4 @@
+# Ignore Python environment files
 venv/
+*.egg-info/
+.python-version
