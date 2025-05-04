@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 import xgboost as xgb
 from mlflow.models.signature import infer_signature
 from src.data.utils import load_data
-from src.features.build_features import preprocess_data
+from src.features.build_arrival_features import preprocess_data
 from src.models.evaluate_model import evaluate_model
 
 
