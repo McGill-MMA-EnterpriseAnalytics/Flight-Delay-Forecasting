@@ -1,4 +1,71 @@
-# Ignore Python environment files
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
 venv/
+ENV/
+env/
+*.env
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints
+
+# Logs and debug
+*.log
+*.tmp
+*.bak
+
+# IDE/workspace
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# MLflow artifacts
+mlruns/
+mlartifacts/
+
+# Data folders
+data/raw/
+data/interim/
+data/processed/
+
+# Model binaries
+models/*.joblib
+models/*.pkl
+
+# Build artifacts
 *.egg-info/
+dist/
+build/
+
+# Optional: ignore saved model formats
+*.ubj
+*.json
+*.onnx
+
+# Ignore Sphinx build
+docs/_build/
+
+# Ignore coverage and test artifacts
+htmlcov/
+.coverage
+.cache/
+.tox/
+pytest_cache/
+
+# Avoid uploading large datasets by mistake
+*.csv
+*.zip
+*.tar.gz
+*.h5
+*.parquet
+
+# Python version file
 .python-version
