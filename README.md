@@ -132,6 +132,19 @@ This enables:
    - Ensures environment reproducibility
    - All services run in isolated containers
 
+---
+
+## Project Screenshots
+
+### MLflow Experiment Tracking
+![MLflow Experiment](docs/mlflow_departure_experiments.png)
+
+### FastAPI Swagger UI - Endpoints
+![FastAPI UI](docs/fastapi_ui_endpoints.png)
+
+### FastAPI Prediction Request Example
+![FastAPI Prediction](docs/fastapi_prediction_sample.png)
+
 
 Project Organization
 ------------
