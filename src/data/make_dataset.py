@@ -17,6 +17,10 @@ def main(input_filepath, output_filepath):
     logger.info("Reading raw data from %s", input_filepath)
 
     df = pd.read_csv(input_filepath)
+
+    # Subset for faster processing
+    df = df.sample(n=1000000, random_state=42).reset_index(drop=True)
+
     output_dir = Path(output_filepath).parent
     output_dir.mkdir(parents=True, exist_ok=True)
 
