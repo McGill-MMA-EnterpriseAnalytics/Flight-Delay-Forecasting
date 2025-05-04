@@ -80,6 +80,35 @@ test_environment:
 # PROJECT RULES                                                                 #
 #################################################################################
 
+#################################################################################
+# PROJECT RULES                                                                 #
+#################################################################################
+
+## Train the model and log to MLflow
+train:
+	$(PYTHON_INTERPRETER) src/models/train_model.py
+
+## Start MLflow UI for experiment tracking
+mlflow_ui:
+	mlflow ui
+
+## Run FastAPI server locally for prediction
+serve_api:
+	uvicorn src.api.main:app --reload
+
+## Build Docker image for the prediction API
+docker_build:
+	docker build -f deployment/Dockerfile -t flight-delay-api .
+
+## Run the Dockerized prediction API on port 8000
+docker_run:
+	docker run -p 8000:8000 flight-delay-api
+
+## Clean model artifacts, processed data, and MLflow logs
+clean_all:
+	rm -rf models/*.joblib
+	rm -rf data/processed/*
+	rm -rf mlruns/
 
 
 #################################################################################
@@ -142,3 +171,5 @@ help:
 		printf "\n"; \
 	}' \
 	| more $(shell test $(shell uname) = Darwin && echo '--no-init --raw-control-chars')
+
+
