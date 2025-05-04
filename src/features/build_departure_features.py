@@ -1,11 +1,8 @@
-import numpy as np
-from sklearn.preprocessing import LabelEncoder
-from sklearn.impute import SimpleImputer
-from imblearn.over_sampling import SMOTE
+import pandas as pd
 
 
-def preprocess_departure_data(df):
-    df = df.copy()
+def preprocess_features(df):
+    # Drop rows with missing values in key columns
     important_cols = [
         "FL_DATE",
         "AIRLINE",
@@ -16,21 +13,33 @@ def preprocess_departure_data(df):
     ]
     df = df.dropna(subset=important_cols)
 
-    lower_bound = np.percentile(df["DEP_DELAY"].dropna(), 1)
-    upper_bound = np.percentile(df["DEP_DELAY"].dropna(), 99)
-    df["DEP_DELAY"] = np.clip(df["DEP_DELAY"], lower_bound, upper_bound)
+    # Create binary target variable
+    df["IS_DELAYED"] = (df["DEP_DELAY"] > 15).astype(int)
 
-    le = LabelEncoder()
-    for col in ["AIRLINE", "ORIGIN", "DEST"]:
-        df[col] = le.fit_transform(df[col])
+    # Drop potential leakage columns
+    leakage_cols = [
+        "DEP_TIME",
+        "DEP_DELAY",
+        "TAXI_OUT",
+        "WHEELS_OFF",
+        "WHEELS_ON",
+        "TAXI_IN",
+        "ARR_TIME",
+        "ARR_DELAY",
+        "ELAPSED_TIME",
+        "AIR_TIME",
+        "CANCELLED",
+        "CANCELLATION_CODE",
+        "DIVERTED",
+        "DELAY_DUE_CARRIER",
+        "DELAY_DUE_WEATHER",
+        "DELAY_DUE_NAS",
+        "DELAY_DUE_SECURITY",
+        "DELAY_DUE_LATE_AIRCRAFT",
+    ]
+    df = df.drop(
+        columns=[col for col in leakage_cols if col in df.columns], errors="ignore"
+    )
 
-    X = df[["AIRLINE", "ORIGIN", "DEST", "CRS_DEP_TIME", "DISTANCE"]]
-    y = (df["DEP_DELAY"] > 15).astype(int)
-
-    imputer = SimpleImputer(strategy="mean")
-    X = imputer.fit_transform(X)
-
-    smote = SMOTE(random_state=42)
-    X_res, y_res = smote.fit_resample(X, y)
-
-    return X_res, y_res
+    print(f"Data after preprocessing: {df.shape[0]} rows, {df.shape[1]} columns")
+    return df
