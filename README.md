@@ -137,13 +137,13 @@ This enables:
 ## Project Screenshots
 
 ### MLflow Experiment Tracking
-![MLflow Experiment](docs/mlflow_departure_experiments.png)
+![MLflow Experiment](docs/mlflow_experiments_dashboard.png)
 
 ### FastAPI Swagger UI - Endpoints
-![FastAPI UI](docs/fastapi_ui_endpoints.png)
+![FastAPI UI](docs/fastapi_endpoints.png)
 
 ### FastAPI Prediction Request Example
-![FastAPI Prediction](docs/fastapi_prediction_sample.png)
+![FastAPI Prediction](docs/predict_endpoint_demo.png)
 
 
 Project Organization
